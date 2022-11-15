@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'booking.css' %}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="navbar" id="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}"> Home</a></li>
+                <li><a href="{% url 'home' %}#main3"> Contact Us</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"> Logout </a></li>
+                <li>
+                    <a href="{% url 'profile' request.user.id %}"> Profile </a>
+                </li>
+                {% else%}
+                <li><a href="{% url 'loginPage' %}"> Login/Sign Up </a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row">
+                <h1 style="margin-left: 4px">Fill the reservation form</h1>
+            </div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row input-container">
+                    <div class="col-xs-12">
+                        <div class="styled-input wide">
+                            <input type="text" name="name" required />
+                            <label>Name</label>
+                        </div>
+                        <div class="styled-input wide">
+                            <input type="email" name="email" required />
+                            <label>Email</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input">
+                            <input type="number" name="numGuests" required />
+                            <label>Total Guests</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input" style="float: right">
+                            <input type="tele" name="phone" required />
+                            <label>Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input">
+                            <input type="time" name="time" required />
+                            <label>Time</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input" style="float: right">
+                            <input type="date" name="date" required />
+                            <label>Date</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="styled-input wide">
+                            <textarea
+                                name="message"
+                                style="
+                                    min-width: 500px;
+                                    max-width: 100%;
+                                    min-height: 50px;
+                                    height: 100%;
+                                    width: 100%;
+                                "
+                                required
+                            ></textarea>
+                            <label>Message</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="btn-lrg submit-btn">
+                            <button
+                                type="submit"
+                                style="
+                                    background: none;
+                                    border: none;
+                                    color: white;
+                                    font-size: 18px;
+                                    cursor: pointer;
+                                    font-family: 'Acme', sans-serif;
+                                "
+                            >
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'user.css' %}" />
+    </head>
+
+    <style>
+        body {
+            background: rgb(170, 193, 220);
+        }
+        .container {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container h1 {
+            color: darkblue;
+            text-align: center;
+            padding-top: 1%;
+        }
+        #info {
+            font-size: 1.2rem;
+            padding: 1.5%;
+            border-bottom: 2px dashed blue;
+            border-top: 2px dashed blue;
+            
+            
+        }
+        #info p{
+            margin:2px;
+            
+        }
+    </style>
+    <body>
+        <div class="navbar" id="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}"> Home</a></li>
+                <li><a href="{% url 'home' %}#main3"> Contact Us</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"> Logout </a></li>
+                <li>
+                    <a href="{% url 'profile' request.user.id %}"> Profile </a>
+                </li>
+                {% else%}
+                <li><a href="{% url 'loginPage' %}"> Login/Sign Up </a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div>
+                <h1>Requests Status</h1>
+                
+            </div>
+            <br />
+            <!-- <hr />
+            <hr /> -->
+            <div id="info">
+                
+                {% for reservation in requests %}
+                <div>
+                    <p>Name on Booking : {{reservation.name}}</p>
+                    <p>Email : {{reservation.email}}</p>
+                    <p>Date : {{reservation.date}}</p>
+                    <p>Time : {{reservation.time}}</p>
+                    <p>Total Guests : {{reservation.numGuests}}</p>
+                    <p>Phone : {{reservation.phone}}</p>
+                    {% if reservation.status == True %}
+                    <p style="display: inline; font-weight:bold;color:darkblue;">Status : <p style="display: inline; color:green;">Booked</p> </p>
+                    {% else %}
+                    <p style="display: inline; font-weight:bold;color:darkblue;">Status : <p style="display: inline; color:rgb(168, 12, 12);">Pending</p> </p>
+                    {% endif %}
+                    
+                    <br />
+                </div>
+                
+                {% endfor %}
+            </div>
+            <!-- <hr />
+            <hr /> -->
+        </div>
+    </body>
+</html>

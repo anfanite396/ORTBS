@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'styling.css' %}" />
+        <link rel="stylesheet" href="{% static 'swiper-bundle.min.css' %}" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Acme&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="navbar" id="navbar">
+            <ul>
+                <li><a href="{% url 'home' %}"> Home</a></li>
+                <li><a href="{% url 'home' %}#main3"> Contact Us</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"> Logout </a></li>
+                <li>
+                    <a href="{% url 'profile' request.user.id %}"> Profile </a>
+                </li>
+                {% else%}
+                <li><a href="{% url 'loginPage' %}"> Login/Sign Up </a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="fullbody">
+            <div class="container-1" id="main">
+                <div class="main_front">
+                    <p>WELCOME TO</p>
+                    <br />
+                    <p>Online Restaurant Table Booking System</p>
+                </div>
+            </div>
+
+            <h1
+                id="h"
+                style="
+                    font-size: 2.4rem;
+                    color: white;
+                    font-family: 'Acme', sans-serif;
+                    font-weight: lighter;
+                    letter-spacing: 2px;
+                "
+            >
+                OUR FEATURED RESTAURANTS FOR YOU
+            </h1>
+            <div class="container-2" id="main2">
+                <div class="slide-container swiper">
+                    <div class="slide-content">
+                        <div class="card-wrapper swiper-wrapper">
+                            {% for restaurant in restaurants%}
+                            <div class="card swiper-slide">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+
+                                    <div class="card-image">
+                                        <img
+                                            src="{{restaurant.img1.url}}"
+                                            alt=""
+                                            class="card-img"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">{{restaurant.name}}</h2>
+                                    <p class="description">
+                                        {{restaurant.about}}
+                                    </p>
+
+                                    <button class="button">
+                                        <a
+                                            href="{% url 'rest' restaurant.id %}"
+                                        >
+                                            View More</a
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- <div class="card swiper-slide">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+
+                                    <div class="card-image">
+                                        <img
+                                            src="images/kemps.jpg"
+                                            alt=""
+                                            class="card-img"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">
+                                        KEMPS CORNER FOOD POINT
+                                    </h2>
+                                    <p class="description">
+                                        The lorem text the section that contains
+                                        header with having open functionality.
+                                        Lorem dolor sit amet consectetur
+                                        adipisicing elit.
+                                    </p>
+
+                                    <button class="button">
+                                        <a href="restaurant/r2/rest2.html">
+                                            View More</a
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card swiper-slide">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+
+                                    <div class="card-image">
+                                        <img
+                                            src="images/treat.jpg"
+                                            alt=""
+                                            class="card-img"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">THE TREAT KAMAND</h2>
+                                    <p class="description">
+                                        The lorem text the section that contains
+                                        header with having open functionality.
+                                        Lorem dolor sit amet consectetur
+                                        adipisicing elit.
+                                    </p>
+
+                                    <button class="button">
+                                        <a href="restaurant/r3/rest3.html">
+                                            View More</a
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card swiper-slide">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+
+                                    <div class="card-image">
+                                        <img
+                                            src="images/profile4.jpg"
+                                            alt=""
+                                            class="card-img"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">Restaurant_Name</h2>
+                                    <p class="description">
+                                        The lorem text the section that contains
+                                        header with having open functionality.
+                                        Lorem dolor sit amet consectetur
+                                        adipisicing elit.
+                                    </p>
+
+                                    <button class="button">
+                                        <a href="restaurant/r4/rest4.html">
+                                            View More</a
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card swiper-slide">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+
+                                    <div class="card-image">
+                                        <img
+                                            src="images/profile5.jpg"
+                                            alt=""
+                                            class="card-img"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card-content">
+                                    <h2 class="name">Restaurant_Name</h2>
+                                    <p class="description">
+                                        The lorem text the section that contains
+                                        header with having open functionality.
+                                        Lorem dolor sit amet consectetur
+                                        adipisicing elit.
+                                    </p>
+
+                                    <button class="button">
+                                        <a href="restaurant/r5/rest5.html">
+                                            View More</a
+                                        >
+                                    </button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="swiper-button-next swiper-navBtn"></div>
+                    <div class="swiper-button-prev swiper-navBtn"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <div class="container-3" id="main3">
+                <h1 style="color: white">For Queries</h1>
+                <div class="content">
+                    <div class="left-side">
+                        <div class="address details">
+                            <i
+                                class="fas fa-map-marker-alt"
+                                style="color: white"
+                            ></i>
+                            <div class="topic">Address</div>
+                            <div class="text-one">Surkhet, NP12</div>
+                            <div class="text-two">Birendranagar 06</div>
+                        </div>
+                        <div class="phone details">
+                            <i
+                                class="fas fa-phone-alt"
+                                style="color: white"
+                            ></i>
+                            <div class="topic">Phone</div>
+                            <div class="text-one">+0098 9893 5647</div>
+                            <div class="text-two">+0096 3434 5678</div>
+                        </div>
+                        <div class="email details">
+                            <i class="fas fa-envelope" style="color: white"></i>
+                            <div class="topic">Email</div>
+                            <div class="text-one">xyz@gmail.com</div>
+                            <div class="text-two">info.xyz@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div
+                            class="topic-text"
+                            style="color: rgb(214, 204, 204)"
+                        >
+                            Send us a message
+                        </div>
+                        <form action="">
+                            <div class="input-box">
+                                <input
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <div class="input-box">
+                                <input
+                                    type="text"
+                                    placeholder="Enter your email"
+                                />
+                            </div>
+                            <div class="input-box message-box">
+                                <textarea
+                                    placeholder="Enter your message"
+                                ></textarea>
+                            </div>
+                            <div class="button_sendnow">
+                                <!-- <input type="button" value="Send Now" /> -->
+                                <button
+                                    type="submit"
+                                    style="
+                                        background-color: #6b43da;
+                                        cursor: pointer;
+                                        color: white;
+                                        width: 100px;
+                                        padding: 1%;
+                                        font-size: 1.1rem;
+                                        border-radius: 4px;
+                                    "
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>CS-207 Project:Created by Group 3.</p>
+        </footer>
+    </body>
+    <script src="{% static 'script.js' %}"></script>
+    <!-- Swiper JS -->
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/script.js' %}"></script>
+</html>

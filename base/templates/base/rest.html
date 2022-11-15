@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{restaurant.name}}</title>
+        <link rel="stylesheet" href="{% static 'restaurant/r1/rest1.css' %}" />
+        <link
+            rel="stylesheet"
+            href="{% static 'restaurant/r1/css/swiper-bundle.min.css' %}"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Acme&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <style></style>
+    <body>
+        <div class="navbar" id="navbar">
+            <ul>
+                <ul>
+                    <li><a href="{% url 'home' %}"> Home</a></li>
+                    <li><a href="{% url 'home' %}#main3"> Contact Us</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"> Logout </a></li>
+                    <li>
+                        <a href="{% url 'profile' request.user.id %}">
+                            Profile
+                        </a>
+                    </li>
+                    {% else%}
+                    <li><a href="{% url 'loginPage' %}"> Login/Sign Up </a></li>
+                    {% endif %}
+                </ul>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="gallery">
+                <div style="font-size: 2.4rem; color: orange">
+                    <br />
+                    {{restaurant.name}}
+                </div>
+                <div style="color: white">OUR GALLERY</div>
+                <div class="container-2" id="main2">
+                    <div class="slide-container swiper">
+                        <div class="slide-content">
+                            <div class="card-wrapper swiper-wrapper">
+                                <div class="card swiper-slide">
+                                    <div class="image-content">
+                                        <span class="overlay"></span>
+
+                                        <div class="card-image">
+                                            <img
+                                                src="{{restaurant.img1.url}}"
+                                                alt="Img not found"
+                                                class="card-img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card swiper-slide">
+                                    <div class="image-content">
+                                        <span class="overlay"></span>
+
+                                        <div class="card-image">
+                                            <img
+                                                src="{{restaurant.img2.url}}"
+                                                alt=""
+                                                class="card-img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card swiper-slide">
+                                    <div class="image-content">
+                                        <span class="overlay"></span>
+
+                                        <div class="card-image">
+                                            <img
+                                                src="{{restaurant.img3.url}}"
+                                                alt=""
+                                                class="card-img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card swiper-slide">
+                                    <div class="image-content">
+                                        <span class="overlay"></span>
+
+                                        <div class="card-image">
+                                            <img
+                                                src="{{restaurant.img4.url}}"
+                                                alt=""
+                                                class="card-img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card swiper-slide">
+                                    <div class="image-content">
+                                        <span class="overlay"></span>
+
+                                        <div class="card-image">
+                                            <img
+                                                src="{{restaurant.menu.url}}"
+                                                alt=""
+                                                class="card-img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-button-next swiper-navBtn"></div>
+                        <div class="swiper-button-prev swiper-navBtn"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="left" id="left">
+                <h1>About Us</h1>
+                <p id="about">{{restaurant.about}}</p>
+    
+            </div>
+            <!-- <div class="below" id="left">
+                <div class="below" id="left">
+                    <div class="leftbutton" id="" style="padding-top: 200px">
+                        <a href="{% url 'bookTable' restaurant.id %}">
+                            <input
+                                type="button"
+                                name="btn"
+                                id="booknow"
+                                value="Book Now"
+                        /></a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="below" id="right"><p>  MAKE YOUR RESERVATION </p>
+                <div class="leftbutton" id="" ><input type="button" name="btn" id="booknow" value="Book Now">
+                    </div>
+                </div>
+
+            <div class="top1" >
+                <!-- <h1 class="boxes" style="font-size: 2rem">
+                    {{restaurant.name}}
+                </h1> -->
+                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, quia! -->
+                <!-- <div class="boxes" style="margin-left: 30%;">
+                    <h2>About</h2>
+                    <p>{{restaurant.about}}</p>
+                </div> -->
+                <div class="boxes" style="margin-left: 20%;">
+                    <h2>&#160;Get news and offers</h2>
+                    <form action="">
+                        <input
+                        type="email"
+                        placeholder="Enter your Email"
+                        name="email_r1"
+                        id="email_r1"
+                        required
+                    />
+                    <button type="submit">submit</button>
+                    </form>                   
+                    
+                </div>
+                <div class="boxes" style="margin-left: 20%;">
+                    <p></p>
+                    <h2>Contact</h2>
+                    {{restaurant.address}} <br />
+                    {{restaurant.phone1}} <br />
+                    <br />
+                    {{restaurant.email}} <br />
+                    Every Day:{{restaurant.openTime}} - {{restaurant.closeTime}}
+                </div>
+                
+                
+                <!-- <div class="boxes">
+                    <p>
+                        <br /><br />{{restaurant.phone1}} <br />
+                        {{restaurant.email}} <br /><br />
+                        Wednesday - Sunday <br />{{restaurant.openTime}} -
+                        {{restaurant.closeTime}}
+                    </p> -->
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- Swiper JS -->
+    <script src="{% static 'restaurant/r1/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- JavaScript -->
+    <script src="{% static 'restaurant/r1/js/script.js' %}"></script>
+</html>

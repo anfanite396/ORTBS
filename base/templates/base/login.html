@@ -1,0 +1,123 @@
+{% block content %}
+<!DOCTYPE html>
+{% load static %} {% load widget_tweaks %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'login/LoginPage.css' %}" />
+    </head>
+    <body>
+        <h2 style="color: white; font-size: 3rem; font-weight: lighter">
+            Welcome to ORTBS
+        </h2>
+        <div class="container" id="container">
+            <div class="form-container sign-in-container">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h1>Sign in</h1>
+
+                    <span>or use your account</span>
+                    <input name="username" type="text" placeholder="Username" />
+                    <input
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                    />
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+            <div class="form-container sign-up-container">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h1>Create Account</h1>
+
+                    <span>or use your email for registration</span>
+                    {{form}}
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+            <!-- <div class="form-container sign-up-container">
+                <form action="" method="POST">
+                    <input type="text" placeholder="Name" />
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <button>Sign Up</button>
+                </form>
+            </div> -->
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>
+                            To keep connected with us please login with your
+                            personal info
+                        </p>
+                        <a href="{% url 'loginPage' %}"
+                            ><button class="ghost" id="signIn">
+                                Sign In
+                            </button></a
+                        >
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>
+                            Enter your personal details and start journey with
+                            us
+                        </p>
+                        <a href="{% url 'registerConsumer' %}"
+                            ><button class="ghost" id="signUp">
+                                Sign Up
+                            </button></a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if page == 'register' %}
+        <script>
+            container.classList.add("right-panel-active");
+            helptext = document.getElementsByClassName("helptext");
+            for (let i = 0; i < helptext.length; i++) {
+                helptext[i].style.display = "none";
+            }
+            label = document.getElementsByTagName("label");
+            for (let i = 0; i < label.length; i++) {
+                label[i].style.display = "none";
+            }
+            document.getElementById("id_first_name").placeholder = "First Name";
+            document.getElementById("id_last_name").placeholder = "Last Name";
+            document.getElementById("id_email").placeholder = "Email";
+            document.getElementById("id_username").placeholder = "Username";
+            document.getElementById("id_password1").placeholder =
+                "Enter Password";
+            document.getElementById("id_password2").placeholder =
+                "Confirm Password";
+        </script>
+        {% else %}
+        <script>
+            container.classList.remove("right-panel-active");
+        </script>
+        {% endif %}
+        <footer>
+            <p>Created <i class="fa fa-heart"></i> by Group 3.</p>
+        </footer>
+
+        <!-- <script>
+            const signUpButton = document.getElementById("signUp");
+            const signInButton = document.getElementById("signIn");
+            const container = document.getElementById("container");
+            signUpButton.addEventListener("click", () => {
+                container.classList.add("right-panel-active");
+            });
+
+            signInButton.addEventListener("click", () => {
+                container.classList.remove("right-panel-active");
+            });
+        </script> -->
+    </body>
+</html>
+{% endblock %}
