@@ -144,7 +144,13 @@
                 </div>
             </div> -->
             <div class="below" id="right"><p>  MAKE YOUR RESERVATION </p>
-                <div class="leftbutton" id="" ><input type="button" name="btn" id="booknow" value="Book Now">
+                <div class="leftbutton" id="" ><a href="{% url 'bookTable' restaurant.id %}">
+                    <input
+                        type="button"
+                        name="btn"
+                        id="booknow"
+                        value="Book Now"
+                /></a>
                     </div>
                 </div>
 
